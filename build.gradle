@@ -33,7 +33,10 @@ dependencies {
 }
 
 test {
+<<<<<<< HEAD
     ignoreFailures = true
+=======
+>>>>>>> 83e014a (initial commit)
     useJUnitPlatform()
 }
 allure {
