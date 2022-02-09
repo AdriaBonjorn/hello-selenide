@@ -31,7 +31,7 @@ public class ImdbTest {
     }
 
     @Test
-    public void imdbSearch() {
+    public void search() {
         $("#suggestion-search").sendKeys("el juego del calamar", Keys.ENTER);
         $(By.linkText("Squid Game")).shouldBe(visible).click();
     }

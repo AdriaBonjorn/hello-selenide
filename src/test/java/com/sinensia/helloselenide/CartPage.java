@@ -2,43 +2,40 @@ package com.sinensia.helloselenide;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 // http://localhost:3000/#!/
 public class CartPage {
 
-    private SelenideElement btnAddCola = $("html > body > robo-robobar > div > div:nth-of-type(2) > robo-place-order > div:nth-of-type(2) > table > tbody > tr:nth-of-type(1) > td:nth-of-type(3) > div > div > div:nth-of-type(2) > button");
+    public SelenideElement btnAddRoboCola = $("html > body > robo-robobar > div > div:nth-of-type(2) > robo-place-order > div:nth-of-type(2) > table > tbody > tr:nth-of-type(1) > td:nth-of-type(3) > div > div > div:nth-of-type(2) > button");
 
-    private SelenideElement btnAddBeer = $("html > body > robo-robobar > div > div:nth-of-type(2) > robo-place-order > div:nth-of-type(2) > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > div > div > div:nth-of-type(2) > button");
+    public SelenideElement btnAddRoboBeer = $("html > body > robo-robobar > div > div:nth-of-type(2) > robo-place-order > div:nth-of-type(2) > table > tbody > tr:nth-of-type(2) > td:nth-of-type(3) > div > div > div:nth-of-type(2) > button");
 
-    private SelenideElement btnAddWine = $("html > body > robo-robobar > div > div:nth-of-type(2) > robo-place-order > div:nth-of-type(2) > table > tbody > tr:nth-of-type(3) > td:nth-of-type(3) > div > div > div:nth-of-type(2) > button");
+    public SelenideElement btnAddRoboWine = $("html > body > robo-robobar > div > div:nth-of-type(2) > robo-place-order > div:nth-of-type(2) > table > tbody > tr:nth-of-type(3) > td:nth-of-type(3) > div > div > div:nth-of-type(2) > button");
 
-    private SelenideElement txtTotal = $("th[class='ng-binding']");
+    public SelenideElement textTotal = $("th[class='ng-binding']");
 
-    private SelenideElement btnCheckout = $(".btn-success");
+    public SelenideElement btnCheckout = $(".btn-success");
 
-    public void addCola() {
-        btnAddCola.click();
+    public void addRoboCola() {
+        btnAddRoboCola.click();
+    }
+
+    public void addRoboBeer() {
+        btnAddRoboBeer.click();
+    }
+
+    public void addRobowine() {
+        btnAddRoboWine.click();
     }
 
     public SelenideElement total() {
-        return txtTotal;
+        return textTotal;
     }
 
     public CheckoutPage checkout() {
         btnCheckout.click();
         return page(CheckoutPage.class);
-    }
-
-    public boolean btnCheckoutEnabled() {
-        return btnCheckout.isEnabled();
-    }
-
-    public SelenideElement btnCheckout() {
-        return btnCheckout;
-    }
-
-    public void addBeer() {
-        btnAddBeer.click();
     }
 }

@@ -40,7 +40,7 @@ public class MainPageTest {
     public void toolsMenu() {
         mainPage.toolsMenu.hover();
 
-        $("div[data-test='menu-main-popup-content']").shouldBe(visible);
+        $("div[data-test='main-menu-item']").shouldBe(visible);
     }
 
     @Test

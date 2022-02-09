@@ -2,30 +2,33 @@ package com.sinensia.helloselenide;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
-// about:blank
+// http://localhost:3000/#!/review
 public class CheckoutPage {
-    private SelenideElement btnOrder = $(".btn-success");
 
-    private SelenideElement ageInput = $("#ageInput" );
+    public SelenideElement ageInput = $("#ageInput" );
+
+    public SelenideElement btnOrder = $(".btn-success");
+
+    public SelenideElement btnCancel = $(".btn-default");
+
+    public void getAgeInput() {
+        ageInput.click();
+    }
+
+    public void sendKeysAge(String age) {
+        ageInput.sendKeys(age);
+    }
+
+    public CartPage getBtnCancel() {
+        btnCancel.click();
+        return page(CartPage.class);
+    }
 
     public OrderPage order() {
         btnOrder.click();
         return page(OrderPage.class);
     }
-
-    public void setAge(String age) {
-        ageInput.sendKeys(age);
-    }
-
-    public String getAge() {
-        return ageInput.getText();
-    }
-
-    public SelenideElement ageInput() {
-        return ageInput;
-    }
-
 }
