@@ -1,5 +1,4 @@
 package com.sinensia.helloselenide;
-//patata
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;

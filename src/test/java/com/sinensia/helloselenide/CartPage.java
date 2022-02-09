@@ -25,4 +25,20 @@ public class CartPage {
         return txtTotal;
     }
 
+    public CheckoutPage checkout() {
+        btnCheckout.click();
+        return page(CheckoutPage.class);
+    }
+
+    public boolean btnCheckoutEnabled() {
+        return btnCheckout.isEnabled();
+    }
+
+    public SelenideElement btnCheckout() {
+        return btnCheckout;
+    }
+
+    public void addBeer() {
+        btnAddBeer.click();
+    }
 }
