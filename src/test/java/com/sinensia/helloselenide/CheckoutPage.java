@@ -8,17 +8,17 @@ import static com.codeborne.selenide.Selenide.page;
 // http://localhost:3000/#!/review
 public class CheckoutPage {
 
-    public SelenideElement ageInput = $("#ageInput" );
+    public static SelenideElement ageInput = $("#ageInput" );
 
-    public SelenideElement btnOrder = $(".btn-success");
+    public static SelenideElement btnOrder = $(".btn-success");
 
     public SelenideElement btnCancel = $(".btn-default");
 
-    public void getAgeInput() {
+    public static void getAgeInput() {
         ageInput.click();
     }
 
-    public void sendKeysAge(String age) {
+    public static void sendKeysAge(String age) {
         ageInput.sendKeys(age);
     }
 
@@ -27,7 +27,7 @@ public class CheckoutPage {
         return page(CartPage.class);
     }
 
-    public OrderPage order() {
+    public static OrderPage order() {
         btnOrder.click();
         return page(OrderPage.class);
     }

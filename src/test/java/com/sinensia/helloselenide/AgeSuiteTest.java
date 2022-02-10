@@ -32,13 +32,13 @@ public class AgeSuiteTest {
         cartPage.btnCheckout.shouldBe(enabled);
 
         CheckoutPage checkoutPage = cartPage.checkout();
-        checkoutPage.btnOrder.shouldBe(disabled);
-        checkoutPage.ageInput.shouldBe(visible);
-        checkoutPage.getAgeInput();
-        checkoutPage.sendKeysAge("21");
-        checkoutPage.btnOrder.shouldBe(enabled);
+        CheckoutPage.btnOrder.shouldBe(disabled);
+        CheckoutPage.ageInput.shouldBe(visible);
+        CheckoutPage.getAgeInput();
+        CheckoutPage.sendKeysAge("21");
+        CheckoutPage.btnOrder.shouldBe(enabled);
 
-        OrderPage orderPage = checkoutPage.order();
+        OrderPage orderPage = CheckoutPage.order();
         orderPage.getConfirmationMessage().shouldBe(text("Coming right up! ~bzzzt~"));
     }
 
@@ -49,14 +49,14 @@ public class AgeSuiteTest {
         cartPage.btnCheckout.shouldBe(enabled);
 
         CheckoutPage checkoutPage = cartPage.checkout();
-        checkoutPage.btnOrder.shouldBe(disabled);
-        checkoutPage.ageInput.shouldBe(visible);
-        checkoutPage.getAgeInput();
-        checkoutPage.sendKeysAge("17");
-        checkoutPage.btnOrder.shouldBe(enabled);
+        CheckoutPage.btnOrder.shouldBe(disabled);
+        CheckoutPage.ageInput.shouldBe(visible);
+        CheckoutPage.getAgeInput();
+        CheckoutPage.sendKeysAge("17");
+        CheckoutPage.btnOrder.shouldBe(enabled);
 
-        OrderPage orderPage = checkoutPage.order();
-        orderPage.getAlertMessage().shouldBe(text("Only adults can buy alcohol!"));
+        OrderPage orderPage = CheckoutPage.order();
+        OrderPage.getAlertMessage().shouldBe(text("Only adults can buy alcohol!"));
     }
 
     @Test
@@ -66,11 +66,11 @@ public class AgeSuiteTest {
         cartPage.btnCheckout.shouldBe(enabled);
 
         CheckoutPage checkoutPage = cartPage.checkout();
-        checkoutPage.ageInput.shouldBe(hidden);
+        CheckoutPage.ageInput.shouldBe(hidden);
         checkoutPage.btnCancel.shouldBe(enabled);
-        checkoutPage.btnOrder.shouldBe(enabled);
+        CheckoutPage.btnOrder.shouldBe(enabled);
 
-        OrderPage orderPage = checkoutPage.order();
+        OrderPage orderPage = CheckoutPage.order();
         orderPage.getConfirmationMessage().shouldBe(text("Coming right up! ~bzzzt~"));
     }
 

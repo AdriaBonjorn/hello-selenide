@@ -7,15 +7,15 @@ import static com.codeborne.selenide.Selenide.$;
 // http://localhost:3000/#!/review
 public class OrderPage {
 
-    public SelenideElement alertMessage = $("p");
+    public static SelenideElement alertMessage = $("p");
 
-    public SelenideElement confirmationMessage = $("p");
+    public static SelenideElement confirmationMessage = $("p");
 
-    public SelenideElement getAlertMessage() {
+    public static SelenideElement getAlertMessage() {
         return alertMessage;
     }
 
-    public SelenideElement getConfirmationMessage() {
+    public static SelenideElement getConfirmationMessage() {
         return confirmationMessage;
     }
 }
