@@ -14,6 +14,8 @@ import static com.codeborne.selenide.Selenide.open;
 public class RobobarStepDefinitions {
     CartPage cartPage;
 
+    //Instructions that the different scenarios use.
+
     @Given("user opens robobar website")
     public void userOpensRobobarWebsite() {
         open("http://localhost:3000");
@@ -44,32 +46,38 @@ public class RobobarStepDefinitions {
         cartPage.btnCheckout.click();
     }
 
+    //Enter age as parameter
     @And("user enter his age is {int}")
     public void userEnterHisAgeIs(int age) {
         CheckoutPage.getAgeInput();
         CheckoutPage.sendKeysAge(String.valueOf(age));
     }
 
+    //To press order button
     @And("user press order button")
     public void userPressOrderButton() {
         CheckoutPage.order();
     }
 
+    //To see if the underage alert pops-up
     @Then("alert is active")
     public void validationIsWrong() {
         OrderPage.getAlertMessage().shouldBe(text("Only adults can buy alcohol!"));
     }
 
+    //To see if the underage alert does not pop-up
     @Then("alert is not active")
     public void alertIsNotActive() {
         OrderPage.getAlertMessage().shouldBe(hidden);
     }
 
+    //To see if the webb confirms de order
     @And("order is confirmed")
     public void orderIsConfirmed() {
         OrderPage.getConfirmationMessage().shouldBe(text("Coming right up! ~bzzzt~"));
     }
 
+    //To add N colas
     @When("user adds {int} colas")
     public void userAddsNBeer(int n) {
         for(int i=0; i<n; ++i) {
@@ -77,6 +85,7 @@ public class RobobarStepDefinitions {
         }
     }
 
+    //To add N beers
     @When("user adds {int} beers")
     public void userAddsNBeers(int n) {
         for(int i=0; i<n; ++i) {
@@ -84,6 +93,7 @@ public class RobobarStepDefinitions {
         }
     }
 
+    //To add N wines
     @When("user adds {int} wines")
     public void userAddsNWines(int n) {
         for(int i=0; i<n; ++i) {
@@ -91,4 +101,11 @@ public class RobobarStepDefinitions {
         }
     }
 
+    @Given("user is ready to check out with alcohol")
+    public void userIsReadyToCheckOutWithAlcohol() {
+        open("http://localhost:3000");
+        userAddsABeer();
+    }
 }
+
+

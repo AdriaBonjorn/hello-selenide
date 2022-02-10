@@ -113,3 +113,21 @@ Feature: Robobar cart
       |1    | 0    |1     | 4.25  |
       |0    | 1    |1     | 5.00  |
       |1    | 0    |1     | 4.25 |
+
+Feature: Robobar age checks
+
+  Background: User has already placed alcoholic beverages in the cart
+    but still don't know the age
+
+    Rule: Underage users can not buy alcohol
+
+        Scenario: minor tries to buy alcohol
+          Given user is ready to check out with alcohol
+          When user enter his age is 17
+          Then alert is active
+
+        Scenario: adult tries to buy alcohol
+          Given user is ready to check out with alcohol
+          When user enter his age is 25
+          And user press order button
+          Then order is confirmed
