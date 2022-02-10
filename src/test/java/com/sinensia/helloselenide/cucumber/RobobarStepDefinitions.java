@@ -25,6 +25,6 @@ public class RobobarStepDefinitions {
 
     @Then("total should be €{double}")
     public void totalShouldBe€(Double total) {
-        cartPage.total().shouldBe(exactText("€"+total.toString()));
+        cartPage.total().shouldBe(exactText(String.format("€"+total)));
     }
 }
