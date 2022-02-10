@@ -20,7 +20,7 @@ public class RobobarStepDefinitions {
 
     @When("user adds a cola")
     public void userAddsACola() {
-        cartPage.addCola();
+        cartPage.addRoboCola();
     }
 
     @Then("total should be €{double}")
