@@ -45,9 +45,9 @@ public class RobobarStepDefinitions {
     }
 
     @And("user enter his age is {int}")
-    public void userEnterHisAgeIs(int arg0) {
+    public void userEnterHisAgeIs(int age) {
         CheckoutPage.getAgeInput();
-        CheckoutPage.sendKeysAge("17");
+        CheckoutPage.sendKeysAge(String.valueOf(age));
     }
 
     @And("user press order button")
@@ -69,4 +69,26 @@ public class RobobarStepDefinitions {
     public void orderIsConfirmed() {
         OrderPage.getConfirmationMessage().shouldBe(text("Coming right up! ~bzzzt~"));
     }
+
+    @When("user adds {int} colas")
+    public void userAddsNBeer(int n) {
+        for(int i=0; i<n; ++i) {
+            cartPage.addRoboCola();
+        }
+    }
+
+    @When("user adds {int} beers")
+    public void userAddsNBeers(int n) {
+        for(int i=0; i<n; ++i) {
+            cartPage.addRoboBeer();
+        }
+    }
+
+    @When("user adds {int} wines")
+    public void userAddsNWines(int n) {
+        for(int i=0; i<n; ++i) {
+            cartPage.addRobowine();
+        }
+    }
+
 }

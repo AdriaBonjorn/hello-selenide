@@ -56,5 +56,60 @@ Feature: Robobar cart
     When user press submit button
     And user enter his age is 25
     And user press order button
-    Then alert is not active
-    And order is confirmed
+    Then order is confirmed
+
+    Scenario Outline: user buy several drinks 1
+      Given user opens robobar website
+      When user adds <cola> colas
+      And user adds <beer> beers
+      Then total should be €<total>
+      Examples:
+      |cola | beer | total|
+      |1    | 0    | 1.25|
+      |1    | 1    | 3.25|
+      |1    | 2    | 5.25|
+
+
+
+  Scenario Outline: user buy several drinks 2
+    Given user opens robobar website
+    When user adds <cola> colas
+    And user adds <beer> beers
+    And user adds <wine> wines
+    Then total should be €<total>
+    Examples:
+      |cola | beer | wine | total |
+      |1    | 0    |1     | 4.25  |
+      |0    | 1    |1     | 5.00  |
+      |1    | 0    |1     | 4.25 |
+
+
+  Scenario Outline: user add several drinks and age is 17
+    Given user opens robobar website
+    When user adds <cola> colas
+    And user adds <beer> beers
+    And user adds <wine> wines
+    When user press submit button
+    And user enter his age is 17
+    And user press order button
+    Then alert is active
+    Examples:
+      |cola | beer | wine | total |
+      |1    | 0    |1     | 4.25  |
+      |0    | 1    |1     | 5.00  |
+      |1    | 0    |1     | 4.25 |
+
+  Scenario Outline: user several drinks and age is 25
+    Given user opens robobar website
+    When user adds <cola> colas
+    And user adds <beer> beers
+    And user adds <wine> wines
+    When user press submit button
+    And user enter his age is 25
+    And user press order button
+    Then order is confirmed
+    Examples:
+      |cola | beer | wine | total |
+      |1    | 0    |1     | 4.25  |
+      |0    | 1    |1     | 5.00  |
+      |1    | 0    |1     | 4.25 |
