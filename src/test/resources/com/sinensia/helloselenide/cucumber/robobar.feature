@@ -9,125 +9,87 @@ Feature: Robobar cart
     Given user opens robobar website
     When user adds a cola
     And user adds a cola
-    Then total should be €2.50
+    Then total should be "€2.50"
 
-  Scenario: user add one beer
+  Scenario: user adds one beer
     Given user opens robobar website
     When user adds a beer
     Then total should be €2.00
 
-  Scenario: user add two beer
+  Scenario Outline: user buys several colas
     Given user opens robobar website
-    When user adds a beer
-    When user adds a beer
-    Then total should be €4.00
-
-  Scenario: user add one wine
-    Given user opens robobar website
-    When user adds a wine
-    Then total should be €3.00
-
-  Scenario: user add two wine
-    Given user opens robobar website
-    When user adds a wine
-    And user adds a wine
-    Then total should be €6.00
-
-  Scenario: user add two wine and a beer
-    Given user opens robobar website
-    When user adds a wine
-    And user adds a wine
-    And user adds a beer
-    Then total should be €8.00
-
-    Scenario: user add one beer and age is 17
-      Given user opens robobar website
-      When user adds a beer
-      Then total should be €2.00
-      When user press submit button
-      And user enter his age is 17
-      And user press order button
-      Then alert is active
-
-  Scenario: user add one beer and age is 25
-    Given user opens robobar website
-    When user adds a beer
-    Then total should be €2.00
-    When user press submit button
-    And user enter his age is 25
-    And user press order button
-    Then order is confirmed
-
-    Scenario Outline: user buy several drinks 1
-      Given user opens robobar website
-      When user adds <cola> colas
-      And user adds <beer> beers
-      Then total should be €<total>
-      Examples:
-      |cola | beer | total|
-      |1    | 0    | 1.25|
-      |1    | 1    | 3.25|
-      |1    | 2    | 5.25|
-
-
-
-  Scenario Outline: user buy several drinks 2
-    Given user opens robobar website
-    When user adds <cola> colas
-    And user adds <beer> beers
-    And user adds <wine> wines
+    When user adds <n> cola
     Then total should be €<total>
     Examples:
-      |cola | beer | wine | total |
-      |1    | 0    |1     | 4.25  |
-      |0    | 1    |1     | 5.00  |
-      |1    | 0    |1     | 4.25 |
+      | n | total |
+      | 1 | 1.25  |
+      | 2 | 2.50  |
+      | 3 | 3.75  |
+      | 4 | 5.00  |
 
-
-  Scenario Outline: user add several drinks and age is 17
+  Scenario Outline: user buys several beers
     Given user opens robobar website
-    When user adds <cola> colas
-    And user adds <beer> beers
-    And user adds <wine> wines
-    When user press submit button
-    And user enter his age is 17
-    And user press order button
-    Then alert is active
+    When user adds <n> beers
+    Then total should be €<total>
     Examples:
-      |cola | beer | wine | total |
-      |1    | 0    |1     | 4.25  |
-      |0    | 1    |1     | 5.00  |
-      |1    | 0    |1     | 4.25 |
+      | n | total |
+      | 1 | 2.00  |
+      | 2 | 4.00  |
 
-  Scenario Outline: user several drinks and age is 25
+  Scenario Outline: user buys several wines
     Given user opens robobar website
-    When user adds <cola> colas
-    And user adds <beer> beers
-    And user adds <wine> wines
-    When user press submit button
-    And user enter his age is 25
-    And user press order button
-    Then order is confirmed
+    When user adds <n> wines
+    Then total should be €<total>
     Examples:
-      |cola | beer | wine | total |
-      |1    | 0    |1     | 4.25  |
-      |0    | 1    |1     | 5.00  |
-      |1    | 0    |1     | 4.25 |
+      | n | total |
+      | 1 | 3.00  |
+      | 2 | 6.00  |
 
-Feature: Robobar age checks
+  Scenario Outline: user buy several drinks
+    Given user opens robobar website
+    When user adds <cola> cola
+    And user adds <beer> beers
+    Then total should be €<total>
+    Examples:
+      | cola | beer | total |
+      | 1    | 0    | 1.25  |
+      | 0    | 1    | 2.00  |
+      | 1    | 1    | 3.25  |
 
-  Background: User has already placed alcoholic beverages in the cart
-    but still don't know the age
+  Scenario Outline: user buy several drinks
+    Given user opens robobar website
+    When user adds <cola> cola <beer> beer <wine> wine
+    Then total should be €<total>
+    Examples:
+      | cola | beer | wine | total |
+      | 1    | 0    | 0    | 1.25  |
 
-    Rule: Underage users can not buy alcohol
+  Scenario Outline: user buy several drinks
+    Given user opens robobar website
+    When user adds <cola> cola <beer> beer <wine> wine
+    Then total should be €<total>
+    And user checks out
+    And user is <age> years old
+    But checkout result is "<expected>"
+    Examples:
+      | cola | beer | wine | total | age | expected |
+      | 1    | 0    | 0    | 1.25  | 17  | pass     |
+      | 1    | 1    | 0    | 3.25  | 17  | fail     |
 
-        Scenario: minor tries to buy alcohol
-          Given user is ready to check out with alcohol
-          When user enter his age is 17
-          Then alert is active
+  Scenario: user buys several drinks
+    Given user opens robobar website
+    When user adds a cola and a beer
+    Then total should be €3.25
 
-        Scenario: adult tries to buy alcohol
-          Given user is ready to check out with alcohol
-          When user enter his age is 25
-          And user press order button
-          Then order is confirmed
+  Scenario: any user buys a cola
+    Given user opens robobar website
+    When user adds a cola
+    And user checks out
+    Then robobar confirms order
+
+  Scenario: any user buys a cola
+    Given user opens robobar website
+    * user adds a cola
+    * user checks out
+    * robobar confirms order
+

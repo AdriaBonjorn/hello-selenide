@@ -17,7 +17,6 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ImdbTest {
-    MainPage mainPage = new MainPage();
 
     @BeforeAll
     public static void setUpAll() {
@@ -31,7 +30,7 @@ public class ImdbTest {
     }
 
     @Test
-    public void search() {
+    public void imdbSearch() {
         $("#suggestion-search").sendKeys("el juego del calamar", Keys.ENTER);
         $(By.linkText("Squid Game")).shouldBe(visible).click();
     }

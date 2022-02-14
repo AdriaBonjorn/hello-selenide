@@ -2,20 +2,20 @@ package com.sinensia.helloselenide;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.*;
 
-// http://localhost:3000/#!/review
+// about:blank
 public class OrderPage {
+    private SelenideElement alertDiv = $(".alert-danger");
 
-    public static SelenideElement alertMessage = $("p");
+    private SelenideElement confirmationMessage = $x("//p");
 
-    public static SelenideElement confirmationMessage = $("p");
-
-    public static SelenideElement getAlertMessage() {
-        return alertMessage;
+    public SelenideElement alert() {
+        return alertDiv;
     }
 
-    public static SelenideElement getConfirmationMessage() {
+    public SelenideElement confirmationMessage() {
         return confirmationMessage;
     }
 }

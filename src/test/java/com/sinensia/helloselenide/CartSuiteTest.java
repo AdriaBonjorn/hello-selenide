@@ -6,76 +6,40 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CartSuiteTest {
-
     CartPage cartPage = new CartPage();
 
     @BeforeAll
     public static void setUpAll() {
-        Configuration.browserSize = "1280x800";
-        SelenideLogger.addListener("allure", new AllureSelenide());
+        SelenideLogger.addListener("allure", new AllureSelenide().screenshots(true).savePageSource(false));
+
+        DesiredCapabilities capabilites = new DesiredCapabilities();
+        capabilites.setCapability("enableVNC", true);
+        Configuration.browserCapabilities = capabilites;
     }
 
     @BeforeEach
     public void setUp() {
-        open("http://localhost:3000/");
+        open("/");
     }
 
     @Test
-    public void onexRoboCola() {
-        cartPage.addRoboCola();
+    public void startTest() {
+        cartPage.checkoutButton().shouldBe(disabled);
+    }
+
+    @Test
+    public void colaTest() {
+        cartPage.checkoutButton().shouldBe(disabled);
+        cartPage.addCola();
         cartPage.total().shouldBe(text("€1.25"));
-    }
-
-    @Test
-    public void onexRoboBeer() {
-        cartPage.addRoboBeer();
-        cartPage.total().shouldBe(text("€2.00"));
-    }
-
-    @Test
-    public void onexRobwine() {
-        cartPage.addRobowine();
-        cartPage.total().shouldBe(text("€3.00"));
-    }
-
-    @Test
-    public void onexRoboCola1xRoboBeer() {
-        cartPage.addRoboCola();
-        cartPage.addRoboBeer();
-        cartPage.total().shouldBe(text("€3.25"));
-    }
-
-    @Test
-    public void onexRoboCola1xRoboBeer1xRobwine() {
-        cartPage.addRoboCola();
-        cartPage.addRoboBeer();
-        cartPage.addRobowine();
-        cartPage.total().shouldBe(text("€6.25"));
-    }
-
-    @Test
-    public void twoxRobwine() {
-        cartPage.addRobowine();
-        cartPage.addRobowine();
-        cartPage.total().shouldBe(text("€6.00"));
-    }
-
-    @Test
-    public void twoxRoboBeer() {
-        cartPage.addRoboBeer();
-        cartPage.addRoboBeer();
-        cartPage.total().shouldBe(text("€4.00"));
-    }
-
-    @Test
-    public void twoxRoboCola() {
-        cartPage.addRoboCola();
-        cartPage.addRoboCola();
+        cartPage.addCola();
         cartPage.total().shouldBe(text("€2.50"));
+        cartPage.checkoutButton().shouldBe(enabled);
     }
 }
