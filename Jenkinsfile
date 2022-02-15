@@ -5,7 +5,7 @@ pipeline {
 
         stage('Test'){
             steps {
-                     sh "./gradlew clean test pitest"
+                     sh "./gradlew clean test"
                         }
                         post {
                             // If Gradle was able to run the tests, even if some of the test
